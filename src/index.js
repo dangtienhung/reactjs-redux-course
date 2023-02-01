@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
-import store from './redux/configStore';
+import { store } from './redux-toolkit/configStore';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
