@@ -5,10 +5,6 @@ const links = ['Dashboard', 'Ecommerce', 'Super market', 'Long vision'];
 
 const Sidebar = () => {
 	const globalOptions = useSelector((state) => state.global);
-	console.log(
-		'🚀 ~ file: Sidebar.jsx:8 ~ Sidebar ~ globalOptions',
-		globalOptions
-	);
 	const { showSidebar } = globalOptions;
 	return (
 		<div
