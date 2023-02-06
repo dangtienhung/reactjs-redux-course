@@ -1,43 +1,50 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import axios from 'axios';
+import { getNews } from '../redux-saga/news/newsSlice';
 
 const HackerNews = () => {
-	const [hits, setHits] = useState([]);
-	const [url, setUrl] = useState(
-		`https://hn.algolia.com/api/v1/search?query=react`
-	);
-	const [query, setQuery] = useState('');
-	const [loading, setLoading] = useState(false);
-	const handleFetchData = useRef({});
-	const isMounted = useRef(true);
+	// const [hits, setHits] = useState([]);
+	// const [url, setUrl] = useState(
+	// 	`https://hn.algolia.com/api/v1/search?query=react`
+	// );
+	// const [query, setQuery] = useState('');
+	// const [loading, setLoading] = useState(false);
+	// const handleFetchData = useRef({});
+	// const isMounted = useRef(true);
+	// useEffect(() => {
+	// 	isMounted.current = true;
+	// 	return () => {
+	// 		isMounted.current = false;
+	// 	};
+	// }, []);
+	// handleFetchData.current = async () => {
+	// 	setLoading(true);
+	// 	try {
+	// 		const response = await axios.get(url);
+	// 		const data = response?.data?.hits;
+	// 		setHits(data);
+	// 		setLoading(false);
+	// 	} catch (error) {
+	// 		setLoading(false);
+	// 		console.log(
+	// 			'🚀 ~ file: HackerNews.jsx:19 ~ handleFetchData.current= ~ error',
+	// 			error
+	// 		);
+	// 	}
+	// };
+	// useEffect(() => {
+	// 	handleFetchData.current();
+	// }, [url]);
+	const dispath = useDispatch();
 	useEffect(() => {
-		isMounted.current = true;
-		return () => {
-			isMounted.current = false;
-		};
-	}, []);
-	handleFetchData.current = async () => {
-		setLoading(true);
-		try {
-			const response = await axios.get(url);
-			const data = response?.data?.hits;
-			setHits(data);
-			setLoading(false);
-		} catch (error) {
-			setLoading(false);
-			console.log(
-				'🚀 ~ file: HackerNews.jsx:19 ~ handleFetchData.current= ~ error',
-				error
-			);
-		}
-	};
-	useEffect(() => {
-		handleFetchData.current();
-	}, [url]);
+		dispath(getNews());
+	}, [dispath]);
+	const { hits, loading, errorMessage } = useSelector((state) => state.news);
 	return (
 		<div className="w-2/4 p-5 mx-auto mt-5 mb-5 bg-white rounded-lg shadow-md">
-			<div className="flex mb-5  gap-x-5">
+			{/* <div className="flex mb-5  gap-x-5">
 				<input
 					type="text"
 					className="block w-full p-5 transition-all border border-gray-200 rounded-md focus:border-blue-400"
@@ -53,7 +60,7 @@ const HackerNews = () => {
 				>
 					Fetching
 				</button>
-			</div>
+			</div> */}
 			{loading && (
 				<div className="w-8 h-8 mx-auto my-10 border-4 border-r-4 border-blue-500 rounded-full loading border-r-transparent animate-spin"></div>
 			)}

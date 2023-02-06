@@ -1,24 +1,24 @@
 import './App.css';
 
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import ButtonToggle from './components/ButtonToggle';
 import HackerNews from './components/HackerNews';
-import Sidebar from './components/Sidebar';
+import { getNews } from './redux-saga/news/newsSlice';
 
 const App = () => {
-	// Generator function
-	useEffect(() => {
-		function* demoGenerator() {
-			yield 1;
-			yield 2;
-			yield 3;
-		}
-		const gen = demoGenerator();
-		console.log(gen.next());
-		console.log(gen.next());
-	}, []);
-	return <div>{/* <HackerNews /> */}</div>;
+	// // Generator function
+	// const dispath = useDispatch();
+	// useEffect(() => {
+	// 	dispath(getNews());
+	// }, [dispath]);
+	// const hits = useSelector((state) => state.news.hits);
+	// console.log('🚀 ~ file: App.js:15 ~ App ~ hits', hits);
+	return (
+		<div>
+			<HackerNews />
+		</div>
+	);
 };
 
 export default App;
