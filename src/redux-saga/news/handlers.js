@@ -1,11 +1,12 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import { setLoading, setNews } from './newsSlice';
 
 import requestGetNews from './requests';
 
-export default function* handleGetUser(action) {
+export default function* handleGetUser({ payload, type }) {
 	try {
-		const response = yield call(requestGetNews);
+		yield put(setLoading(true));
+		const response = yield call(requestGetNews, payload);
 		const { hits } = response?.data;
 		yield put(setNews(hits));
 		yield put(setLoading(false));
